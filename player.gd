@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 const UP = Vector2(0, 0) #Sets up as topdown
-const MAX_SPEED = 100 # Pixels/second
-const ACCELERATION = 25 
+const MAX_SPEED = 90 # Pixels/second
+const ACCELERATION = 20 
 
 var motion = Vector2() # single unit used to store (x, y)
 
@@ -18,7 +18,7 @@ func _physics_process(delta):
 		motion.y = max(motion.y-ACCELERATION, -MAX_SPEED) # Accelerate up
 	
 	else:
-		motion.y = lerp(motion.y, 0, 0.2) # Otherwise add friction in Y plane
+		motion.y = lerp(motion.y, 0, 0.15) # Otherwise add friction in Y plane
 		
 	if Input.is_action_pressed("ui_right"): # Is D pressed
 		motion.x = min(motion.x+ACCELERATION, MAX_SPEED) # accelerate right
@@ -27,9 +27,9 @@ func _physics_process(delta):
 		motion.x = max(motion.x-ACCELERATION, -MAX_SPEED)
 
 	else:
-		motion.x = lerp(motion.x, 0, 0.2)
+		motion.x = lerp(motion.x, 0, 0.15)
 		
-	look_at(get_global_mouse_position())
+	look_at(get_global_mouse_position()) #point at cursor
 
 	motion = move_and_slide(motion)
 	pass
